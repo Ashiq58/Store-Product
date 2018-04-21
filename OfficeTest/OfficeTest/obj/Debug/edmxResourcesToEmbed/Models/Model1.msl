@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TestModelStoreContainer" CdmEntityContainer="TestEntities">
+    <EntitySetMapping Name="Tb_Product">
+      <EntityTypeMapping TypeName="TestModel.Tb_Product">
+        <MappingFragment StoreEntitySet="Tb_Product">
+          <ScalarProperty Name="Unit_Id" ColumnName="Unit_Id" />
+          <ScalarProperty Name="Brand_Id" ColumnName="Brand_Id" />
+          <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
+          <ScalarProperty Name="Product_Name" ColumnName="Product_Name" />
+          <ScalarProperty Name="Product_Price" ColumnName="Product_Price" />
+          <ScalarProperty Name="Product_Description" ColumnName="Product_Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tb_Brand">
+      <EntityTypeMapping TypeName="TestModel.Tb_Brand">
+        <MappingFragment StoreEntitySet="Tb_Brand">
+          <ScalarProperty Name="Brand_Name" ColumnName="Brand_Name" />
+          <ScalarProperty Name="Brand_Id" ColumnName="Brand_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tb_ProductReceive">
+      <EntityTypeMapping TypeName="TestModel.Tb_ProductReceive">
+        <MappingFragment StoreEntitySet="Tb_ProductReceive">
+          <ScalarProperty Name="MRR_No" ColumnName="MRR_No" />
+          <ScalarProperty Name="Receive_Qty" ColumnName="Receive_Qty" />
+          <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
+          <ScalarProperty Name="Receive_Date" ColumnName="Receive_Date" />
+          <ScalarProperty Name="ProductReceive_Id" ColumnName="ProductReceive_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tb_ProductStore">
+      <EntityTypeMapping TypeName="TestModel.Tb_ProductStore">
+        <MappingFragment StoreEntitySet="Tb_ProductStore">
+          <ScalarProperty Name="Balance_Qty" ColumnName="Balance_Qty" />
+          <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
+          <ScalarProperty Name="ProductStore_Id" ColumnName="ProductStore_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tb_Unit">
+      <EntityTypeMapping TypeName="TestModel.Tb_Unit">
+        <MappingFragment StoreEntitySet="Tb_Unit">
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+          <ScalarProperty Name="Unit_Id" ColumnName="Unit_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="Product_Report" FunctionName="TestModel.Store.Product_Report">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TestModel.Product_Report_Result">
+          <ScalarProperty Name="Product_Name" ColumnName="Product_Name" />
+          <ScalarProperty Name="Brand_Name" ColumnName="Brand_Name" />
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="TestModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="TestModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="TestModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="TestModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TestModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="TestModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TestModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="TestModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="TestModel.Store.sp_upgraddiagrams" />
+    <FunctionImportMapping FunctionImportName="storeProduct" FunctionName="TestModel.Store.storeProduct">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TestModel.storeProduct_Result">
+          <ScalarProperty Name="Product_Name" ColumnName="Product_Name" />
+          <ScalarProperty Name="Brand_Name" ColumnName="Brand_Name" />
+          <ScalarProperty Name="Product_Price" ColumnName="Product_Price" />
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+          <ScalarProperty Name="Balance_Qty" ColumnName="Balance_Qty" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Tb_Product">
+    <Key>
+      <PropertyRef Name="Product_Id" />
+    </Key>
+    <Property Name="Product_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Product_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Product_Price" Type="Int32" Nullable="false" />
+    <Property Name="Product_Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Brand_Id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Tb_Brand" Relationship="TestModel.FK_Tb_Product_Tb_Brand" FromRole="Tb_Product" ToRole="Tb_Brand" />
+    <NavigationProperty Name="Tb_ProductReceive" Relationship="TestModel.FK_Tb_ProductReceive_Tb_ProductReceive" FromRole="Tb_Product" ToRole="Tb_ProductReceive" />
+    <NavigationProperty Name="Tb_ProductStore" Relationship="TestModel.FK_Tb_ProductStore_Tb_ProductStore" FromRole="Tb_Product" ToRole="Tb_ProductStore" />
+    <Property Name="Unit_Id" Type="Int32" />
+    <NavigationProperty Name="Tb_Unit" Relationship="TestModel.FK_Tb_Product_Tb_Unit" FromRole="Tb_Product" ToRole="Tb_Unit" />
+  </EntityType>
+  <EntityContainer Name="TestEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Tb_Product" EntityType="Self.Tb_Product" />
+    <EntitySet Name="Tb_Brand" EntityType="TestModel.Tb_Brand" />
+    <AssociationSet Name="FK_Tb_Product_Tb_Brand" Association="TestModel.FK_Tb_Product_Tb_Brand">
+      <End Role="Tb_Brand" EntitySet="Tb_Brand" />
+      <End Role="Tb_Product" EntitySet="Tb_Product" />
+    </AssociationSet>
+    <EntitySet Name="Tb_ProductReceive" EntityType="TestModel.Tb_ProductReceive" />
+    <EntitySet Name="Tb_ProductStore" EntityType="TestModel.Tb_ProductStore" />
+    <AssociationSet Name="FK_Tb_ProductReceive_Tb_ProductReceive" Association="TestModel.FK_Tb_ProductReceive_Tb_ProductReceive">
+      <End Role="Tb_Product" EntitySet="Tb_Product" />
+      <End Role="Tb_ProductReceive" EntitySet="Tb_ProductReceive" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tb_ProductStore_Tb_ProductStore" Association="TestModel.FK_Tb_ProductStore_Tb_ProductStore">
+      <End Role="Tb_Product" EntitySet="Tb_Product" />
+      <End Role="Tb_ProductStore" EntitySet="Tb_ProductStore" />
+    </AssociationSet>
+    <EntitySet Name="Tb_Unit" EntityType="TestModel.Tb_Unit" />
+    <AssociationSet Name="FK_Tb_Product_Tb_Unit" Association="TestModel.FK_Tb_Product_Tb_Unit">
+      <End Role="Tb_Unit" EntitySet="Tb_Unit" />
+      <End Role="Tb_Product" EntitySet="Tb_Product" />
+    </AssociationSet>
+    <FunctionImport Name="Product_Report" ReturnType="Collection(TestModel.Product_Report_Result)" />
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(TestModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(TestModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <FunctionImport Name="storeProduct" ReturnType="Collection(TestModel.storeProduct_Result)" />
+  </EntityContainer>
+  <EntityType Name="Tb_Brand">
+    <Key>
+      <PropertyRef Name="Brand_Id" />
+    </Key>
+    <Property Name="Brand_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Brand_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Tb_Product" Relationship="TestModel.FK_Tb_Product_Tb_Brand" FromRole="Tb_Brand" ToRole="Tb_Product" />
+  </EntityType>
+  <Association Name="FK_Tb_Product_Tb_Brand">
+    <End Type="TestModel.Tb_Brand" Role="Tb_Brand" Multiplicity="1" />
+    <End Type="TestModel.Tb_Product" Role="Tb_Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tb_Brand">
+        <PropertyRef Name="Brand_Id" />
+      </Principal>
+      <Dependent Role="Tb_Product">
+        <PropertyRef Name="Brand_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Tb_ProductReceive">
+    <Key>
+      <PropertyRef Name="ProductReceive_Id" />
+    </Key>
+    <Property Name="ProductReceive_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Receive_Date" Type="DateTime" Precision="0" />
+    <Property Name="Product_Id" Type="Int32" />
+    <Property Name="Receive_Qty" Type="Int32" />
+    <NavigationProperty Name="Tb_Product" Relationship="TestModel.FK_Tb_ProductReceive_Tb_ProductReceive" FromRole="Tb_ProductReceive" ToRole="Tb_Product" />
+    <Property Name="MRR_No" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Tb_ProductStore">
+    <Key>
+      <PropertyRef Name="ProductStore_Id" />
+    </Key>
+    <Property Name="ProductStore_Id" Type="Int32" Nullable="false" />
+    <Property Name="Product_Id" Type="Int32" />
+    <Property Name="Balance_Qty" Type="Int32" />
+    <NavigationProperty Name="Tb_Product" Relationship="TestModel.FK_Tb_ProductStore_Tb_ProductStore" FromRole="Tb_ProductStore" ToRole="Tb_Product" />
+  </EntityType>
+  <Association Name="FK_Tb_ProductReceive_Tb_ProductReceive">
+    <End Type="TestModel.Tb_Product" Role="Tb_Product" Multiplicity="0..1" />
+    <End Type="TestModel.Tb_ProductReceive" Role="Tb_ProductReceive" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tb_Product">
+        <PropertyRef Name="Product_Id" />
+      </Principal>
+      <Dependent Role="Tb_ProductReceive">
+        <PropertyRef Name="Product_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tb_ProductStore_Tb_ProductStore">
+    <End Type="TestModel.Tb_Product" Role="Tb_Product" Multiplicity="0..1" />
+    <End Type="TestModel.Tb_ProductStore" Role="Tb_ProductStore" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tb_Product">
+        <PropertyRef Name="Product_Id" />
+      </Principal>
+      <Dependent Role="Tb_ProductStore">
+        <PropertyRef Name="Product_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Tb_Unit">
+    <Key>
+      <PropertyRef Name="Unit_Id" />
+    </Key>
+    <Property Name="Unit_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Unit" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Tb_Product" Relationship="TestModel.FK_Tb_Product_Tb_Unit" FromRole="Tb_Unit" ToRole="Tb_Product" />
+  </EntityType>
+  <Association Name="FK_Tb_Product_Tb_Unit">
+    <End Type="TestModel.Tb_Unit" Role="Tb_Unit" Multiplicity="0..1" />
+    <End Type="TestModel.Tb_Product" Role="Tb_Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tb_Unit">
+        <PropertyRef Name="Unit_Id" />
+      </Principal>
+      <Dependent Role="Tb_Product">
+        <PropertyRef Name="Unit_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="Product_Report_Result">
+    <Property Type="String" Name="Product_Name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Brand_Name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Unit" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="storeProduct_Result">
+    <Property Type="String" Name="Product_Name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Brand_Name" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="Product_Price" Nullable="false" />
+    <Property Type="String" Name="Unit" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="Balance_Qty" Nullable="true" />
+  </ComplexType>
+</Schema>
